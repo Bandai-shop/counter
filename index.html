@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandai</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+        * {  
+            margin: 0px;
+        }
+
+        .counter-box {
+            background-color: #000000; 
+            background-image: url('https://bandaicollectors.com.mx/img/counter-bg.jpeg'); 
+            background-position: center; background-size: cover; 
+            background-repeat: no-repeat; 
+            margin-top: 50px; 
+            color: #ffffff; padding: 20px; 
+            display: flex; 
+            justify-content: center;
+            letter-spacing: 2px;
+            margin: 0 auto; 
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .counter-copy {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .copy-1 {
+            font-size: 30px; font-weight: bold; text-align: center;
+        }
+
+        .copy-2 {
+            font-size: 20px; 
+            font-weight: bold; 
+            text-align: center;
+        }
+
+        #count-down {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 255px;
+        }
+
+        #days, #hours, #minutes, #seconds  {
+            font-size: 70px;
+        }
+
+        .subc  {
+            font-size: 25px;
+            margin-top: -20px;
+            letter-spacing: 1px;
+        }
+
+        .img-responsive {
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 991px) {
+            .counter-box {
+                display: block;
+            }
+            #count-down {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script>
+        let deadline = 'Oct 15 2020 19:00:00 GMT-0500';
+        
+        function getRemainTime(){
+        let now = new Date(),
+            remainTime = (new Date(deadline) - now + 1000) / 1000,
+            remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
+            remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
+            remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
+            remainDays = Math.floor(remainTime / (3600 * 24));
+        
+            return {
+            remainSeconds,
+            remainMinutes,
+            remainHours,
+            remainDays,
+            remainTime,
+            }
+        }
+        
+        var intervalID = setInterval(countDown, 1000, 'Parametro 1');
+            
+        function countDown () {
+            let days = document.getElementById('days');
+            let hours = document.getElementById('hours');
+            let minutes = document.getElementById('minutes');
+            let seconds = document.getElementById('seconds');
+            let t = getRemainTime(deadline);
+            days.innerHTML = `${t.remainDays}:`;
+            hours.innerHTML = `${t.remainHours}:`;
+            minutes.innerHTML = `${t.remainMinutes}:`;
+            seconds.innerHTML = `${t.remainSeconds}`;
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="counter-box">
+        <div class="counter-copy"> 
+            <div>
+                <img class="img-responsive" src="https://bandaicollectors.com.mx/img/copy-store.png" alt="tienda-enlinea-bandai">
+            </div>
+        </div>
+        <div id="count-down">
+            <div>
+                <div id="days"></div>
+                <p class="subc">DÍAS</p>
+            </div>
+            <div>
+                <div id="hours"></div>
+                <p class="subc">HRS</p>
+            </div>
+            <div>
+                <div id="minutes"></div>
+                <p class="subc">MIN</p>
+            </div>
+            <div>
+                <div id="seconds"></div>
+                <p class="subc">SEG</p>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+</html>
